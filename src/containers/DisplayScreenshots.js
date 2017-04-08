@@ -8,11 +8,13 @@ class DisplayScreenshots extends Component {
   }
 
   renderScreenshots () {
-    return this.props.screenshots.map((image) => 
-      <li key={image.id}>
-        <img src={image.src} alt="screenshot"/>
-      </li>
-    )
+    return this.props.screenshots.map((image) => {
+      return (
+        <li key={image.id}>
+          <img src={image.src} alt='screenshot' />
+        </li>
+      )
+    })
   }
 
   render () {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Camera from '../containers/Camera'
+import DisplayScreenshots from '../containers/DisplayScreenshots'
 
 export default class App extends Component {
   render () {
@@ -8,6 +9,9 @@ export default class App extends Component {
         <h2>Gauge</h2>
         <div>
           <Camera />
+        </div>
+        <div>
+          <DisplayScreenshots />
         </div>
       </div>
     )
