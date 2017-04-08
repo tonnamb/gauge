@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import screenshots from './screenshotsReducer'
+import webcam from './webcamReducer'
 
 const rootReducer = combineReducers({
-  screenshots
+  screenshots,
+  webcam
 })
 
 export default rootReducer

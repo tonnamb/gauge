@@ -31,3 +31,10 @@ export const fetchEmotions = (screenshot) => {
     })
   }
 }
+
+export const mountWebcam = (webcam) => {
+  return {
+    type: types.MOUNT_WEBCAM,
+    webcam
+  }
+}
