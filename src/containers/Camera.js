@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Webcam from 'react-webcam'
-import { saveScreenshot } from '../actions'
+import { fetchEmotions } from '../actions'
 
 class Camera extends Component {
   constructor (props) {
@@ -13,8 +13,7 @@ class Camera extends Component {
 
   takeScreenshot () {
     const screenshot = this.refs.webcam.getScreenshot()
-    this.props.saveScreenshot(screenshot)
-
+    this.props.fetchEmotions(screenshot)
   }
 
   render () {
@@ -36,11 +35,11 @@ class Camera extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ saveScreenshot }, dispatch)
+  return bindActionCreators({ fetchEmotions }, dispatch)
 }
 
 Camera.propTypes = {
-  saveScreenshot: React.PropTypes.func.isRequired
+  fetchEmotions: React.PropTypes.func.isRequired
 }
 
 export default connect(null, mapDispatchToProps)(Camera)
