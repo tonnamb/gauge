@@ -14,7 +14,7 @@ class Camera extends Component {
   takeScreenshot () {
     const screenshot = this.refs.webcam.getScreenshot()
     this.props.saveScreenshot(screenshot)
-    console.log("Screenshotss")
+    console.log("Test")
   }
 
   render () {
