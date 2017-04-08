@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import ExampleButton from '../containers/ExampleButton'
+import Camera from '../containers/Camera'
 
 export default class App extends Component {
   render () {
     return (
       <div>
-        <div>React Redux Boilerplate</div>
+        <h2>Gauge</h2>
         <div>
-          <ExampleButton />
+          <Camera />
         </div>
       </div>
     )

@@ -1,6 +1,8 @@
 import * as types from './types'
 
-export function exampleActionCreator () {
-  console.log('Creating action')
-  return { type: types.EXAMPLE }
+export const saveScreenshot = (screenshot) => {
+  return {
+    type: types.SAVE_SCREENSHOT,
+    screenshot
+  }
 }
