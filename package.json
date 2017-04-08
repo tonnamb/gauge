@@ -12,6 +12,7 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "material-ui": "^0.17.1",
     "project-oxford": "^1.7.0",
     "react": "^15.5.3",
     "react-dom": "^15.5.3",
