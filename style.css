@@ -1,0 +1,5 @@
+tbody tr:nth-child(odd) {background: #FFF}
+body {background: #EEE}
+table {padding-top: 10px}
+thead {padding: 10px 0px}
+tbody {font-family: "Roboto"}
