@@ -7,6 +7,17 @@ import Chip from 'material-ui/Chip';
 import FontIcon from 'material-ui/FontIcon';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+const styles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: '5px 0px'
+  },
+};
+
 class DisplayScreenshots extends Component {
   constructor (props) {
     super(props)
@@ -18,10 +29,27 @@ class DisplayScreenshots extends Component {
     return this.props.screenshots.map((image) => {
       return (
         <div key={image.id}>
-          <img src={image.src} alt='screenshot' />
+          <img src={image.src} alt='screenshot' style={{height: '300px'}} />
           {this.renderScores(image)}
         </div>
       )
+    })
+  }
+
+  renderMoods(scores) {
+    // TODO: Sort scores before mapping
+    // FIXME: map only works for arrays
+    return scores.map((score) => {
+      if (score.value == 0) {
+        return ""
+      } else {
+        return (
+          <MuiThemeProvider><Chip style={styles.chip} alt={score.key}>
+            <Avatar src={'img/' + score.key + '.png'} />
+            {(score.value * 100).toFixed(0)}%
+          </Chip></MuiThemeProvider>
+        )
+      }
     })
   }
 
@@ -29,7 +57,10 @@ class DisplayScreenshots extends Component {
     if (image.emotions.length === 0) {
       return (
         <div>
-          <p>Number of faces recognized = 0</p>
+        <MuiThemeProvider><Chip alt="faces">
+          <Avatar src={'img/no_faces.png'} />
+          No Faces Detected
+        </Chip></MuiThemeProvider>
         </div>
       )
     } else {
@@ -37,18 +68,20 @@ class DisplayScreenshots extends Component {
       const plotData = this.prepDataBarChart(image.emotions)
       return (
         <div>
-          <p>Number of faces recognized = {image.emotions.length}</p>
-          <MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
+          <div style={styles.wrapper}><MuiThemeProvider><Chip style={styles.chip} alt="faces">
+            <Avatar src={'img/faces.png'} />
+            {image.emotions.length} Face(s)
+          </Chip></MuiThemeProvider>
+          <MuiThemeProvider><Chip style={styles.chip} alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.first.key + '.png'} />
             {(topTwo.first.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
-          <br />
-          <MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
+          <MuiThemeProvider><Chip style={styles.chip} alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.second.key + '.png'} />
             {(topTwo.second.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
-          <br />
-          <BarChart width={600} height={300} data={plotData}
+          </div>
+          <BarChart width={650} height={300} data={plotData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
             <XAxis dataKey='name' />
             <YAxis />
