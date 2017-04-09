@@ -21,7 +21,10 @@ class DisplayScreenshots extends Component {
             <img src={image.src} alt='screenshot' height='400' />
           </td>
           <td>
-            {(index + 1) * 5} s
+            <MuiThemeProvider><Chip alt="faces">
+              <Avatar src={'img/stopwatch.png'} />
+              {(index+1) * 5}s
+            </Chip></MuiThemeProvider>
             {this.renderScores(image, index, speech)}
           </td>
         </tr>
@@ -145,11 +148,11 @@ class DisplayScreenshots extends Component {
 
   render () {
     return (
-      <div style={{fontFamily: 'Lobster Two'}}>
-        <table cellSpacing='20'>
+      <div style={{fontFamily:"Lobster Two"}}>
+        <table width="100%" style={{borderCollapse: 'collapse'}} cellSpacing='20'>
           <thead>
             <tr>
-              <th colSpan='2' style={{fontFamily: 'Lato', fontSize: '30px'}}>RESULTS</th>
+              <th colSpan='2' style= {{fontFamily:"Lato", fontSize:"30px", padding_bottom: "10px"}}>RESULTS</th>
             </tr>
             <tr>
               <th style={{fontSize: '30px'}}>Screenshots</th>

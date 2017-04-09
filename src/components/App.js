@@ -11,7 +11,6 @@ export default class App extends Component {
         <div>
           <Camera />
         </div>
-        <br />
         <div>
           <DisplayScreenshots />
         </div>
