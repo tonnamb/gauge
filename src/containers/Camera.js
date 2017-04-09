@@ -51,8 +51,7 @@ const mapDispatchToProps = (dispatch) => {
 
 Camera.propTypes = {
   fetchEmotions: React.PropTypes.func.isRequired,
-  mountWebcam: React.PropTypes.func.isRequired,
-  webcam: React.PropTypes.object.isRequired
+  mountWebcam: React.PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Camera)
