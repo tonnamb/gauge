@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
 
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
-import FontIcon from 'material-ui/FontIcon';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Avatar from 'material-ui/Avatar'
+import Chip from 'material-ui/Chip'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 class DisplayScreenshots extends Component {
   constructor (props) {
@@ -38,12 +37,12 @@ class DisplayScreenshots extends Component {
       return (
         <div>
           <p>Number of faces recognized = {image.emotions.length}</p>
-          <MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
+          <MuiThemeProvider><Chip alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.first.key + '.png'} />
             {(topTwo.first.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
           <br />
-          <MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
+          <MuiThemeProvider><Chip alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.second.key + '.png'} />
             {(topTwo.second.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
