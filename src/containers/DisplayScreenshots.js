@@ -12,18 +12,23 @@ class DisplayScreenshots extends Component {
     return this.props.screenshots.map((image) => {
       const topTwo = this.getTopTwo(this.getAvgScores(image.emotions))
       const plotData = this.prepDataBarChart(image.emotions)
+
       return (
         <li key={image.id}>
           <img src={image.src} alt='screenshot' />
           <p>Number of faces recognized = {image.emotions.length}</p>
-          <p>1. {topTwo.first.key} = {(topTwo.first.value * 100).toFixed(0)} %</p>
-          <p>2. {topTwo.second.key} = {(topTwo.second.value * 100).toFixed(0)} %</p>
+          <p>
+            1. <img src={'img/' + topTwo.first.key + '.png'} alt={topTwo.first.key} height={20} /> {topTwo.first.key} = {(topTwo.first.value * 100).toFixed(0)} %
+          </p>
+          <p>
+            2. <img src={'img/' + topTwo.second.key + '.png'} alt={topTwo.second.key} height={20} /> {topTwo.second.key} = {(topTwo.second.value * 100).toFixed(0)} %
+          </p>
           <BarChart width={600} height={300} data={plotData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
             <XAxis dataKey='name' />
             <YAxis />
             <Tooltip />
-            <Bar dataKey='count' fill='#8884d8' />
+            <Bar dataKey='count' />
           </BarChart>
         </li>
       )
@@ -81,8 +86,18 @@ class DisplayScreenshots extends Component {
 
     // prepare data
     let data = []
+    const colorEmotions = {
+      anger: 'rgb(207, 12, 15)',
+      contempt: 'rgba(235, 45, 102, 0.95)',
+      disgust: 'rgb(76, 168, 46)',
+      fear: 'rgb(5, 8, 2)',
+      happiness: 'rgb(213, 244, 10)',
+      neutral: 'rgb(19, 227, 11)',
+      sadness: 'rgb(11, 127, 227)',
+      surprise: 'rgb(110, 14, 220)'
+    }
     Object.entries(emotionsData).forEach(([key, value]) => {
-      data.push({name: key, count: Number(value)})
+      data.push({name: key, count: Number(value), fill: colorEmotions[key]})
     })
     return data
   }
