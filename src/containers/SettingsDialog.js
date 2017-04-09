@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Slider from 'material-ui/Slider';
 import TextField from 'material-ui/TextField';
 import FontIcon from 'material-ui/FontIcon';
-import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class SettingsDialog extends React.Component {
 
@@ -39,17 +39,21 @@ export default class SettingsDialog extends React.Component {
       />,
     ];
 
-    const settings = [
+    const settings = (<div>
       <TextField
       hintText="API Key"
       errorText="This field is required"
       />,
       <Slider label="Test" step={0.10} value={0.5} />
-      ];
+      </div>)
 
     return (
       <div>
-        <MenuItem primaryText="Settings" rightIcon={<FontIcon className="material-icons">settings</FontIcon>} onTouchTap={this.handleOpen}/>
+        <RaisedButton
+          backgroundColor="#a4c639"
+          icon={<FontIcon className="material-icons">settings</FontIcon>}
+          onTouchTap={this.handleOpen}
+        />
         <Dialog
           title="Settings"
           actions={actions}

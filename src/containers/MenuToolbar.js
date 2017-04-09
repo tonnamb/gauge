@@ -54,23 +54,7 @@ class MenuToolbar extends React.Component {
           <ToolbarTitle text="00:00:00" />
           <ToolbarSeparator />
           <RaisedButton label={this.state.text} primary={!this.state.capturing} secondary={this.state.capturing} onTouchTap={this.takeScreenshot}/>
-          <RaisedButton
-            backgroundColor="#a4c639"
-            icon={<FontIcon className="material-icons">settings</FontIcon>}
-          />
-          <IconMenu
-            iconButtonElement={
-              <IconButton touch={true}>
-                <NavigationExpandMoreIcon />
-              </IconButton>
-            }
-            anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-            targetOrigin={{horizontal: 'left', vertical: 'top'}}
-          >
-            <SettingsDialog />
-            <Divider />
-            <MenuItem primaryText="More Info" />
-          </IconMenu>
+          <SettingsDialog />
         </ToolbarGroup>
       </Toolbar>
       </MuiThemeProvider>

@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
 
+import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
+import FontIcon from 'material-ui/FontIcon';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 class DisplayScreenshots extends Component {
   constructor (props) {
     super(props)
@@ -17,11 +22,16 @@ class DisplayScreenshots extends Component {
         <li key={image.id}>
           <img src={image.src} alt='screenshot' />
           <p>Number of faces recognized = {image.emotions.length}</p>
-          <p>
-            1. <img src={'img/' + topTwo.first.key + '.png'} alt={topTwo.first.key} height={20} /> {topTwo.first.key} = {(topTwo.first.value * 100).toFixed(0)} %
+          <p><MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
+            <Avatar src={'img/' + topTwo.first.key + '.png'} />
+            {(topTwo.first.value * 100).toFixed(0)}%
+          </Chip></MuiThemeProvider>
           </p>
           <p>
-            2. <img src={'img/' + topTwo.second.key + '.png'} alt={topTwo.second.key} height={20} /> {topTwo.second.key} = {(topTwo.second.value * 100).toFixed(0)} %
+          <MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
+            <Avatar src={'img/' + topTwo.second.key + '.png'} />
+            {(topTwo.second.value * 100).toFixed(0)}%
+          </Chip></MuiThemeProvider>
           </p>
           <BarChart width={600} height={300} data={plotData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
