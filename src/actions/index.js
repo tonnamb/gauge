@@ -39,3 +39,9 @@ export const mountWebcam = (webcam) => {
     webcam
   }
 }
+
+export const propagateTime = () => {
+  return {
+    type: types.PROPAGATE_TIME
+  }
+}
