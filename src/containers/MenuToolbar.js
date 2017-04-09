@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import Divider from 'material-ui/Divider';
+import SettingsDialog from './SettingsDialog'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -18,7 +19,6 @@ class MenuToolbar extends React.Component {
   constructor(props) {
     super(props);
     this.takeScreenshot = this.takeScreenshot.bind(this)
-    this.startTime = null
   }
 
   state = {
@@ -31,7 +31,6 @@ class MenuToolbar extends React.Component {
       this.setState({capturing: false, text: "Capture"})
     } else {
       this.setState({capturing: true, text: "Stop Capturing"})
-      this.startTime = new Date().now();
     }
   }
 
@@ -41,12 +40,6 @@ class MenuToolbar extends React.Component {
     this.toggleCapturing()
     const screenshot = this.props.webcam.getScreenshot()
     this.props.fetchEmotions(screenshot)
-  }
-
-  getTime() {
-    if (this.state.capturing) {
-      var time = new Date().now - this.startTime
-    }
   }
 
   render() {
@@ -61,6 +54,10 @@ class MenuToolbar extends React.Component {
           <ToolbarTitle text="00:00:00" />
           <ToolbarSeparator />
           <RaisedButton label={this.state.text} primary={!this.state.capturing} secondary={this.state.capturing} onTouchTap={this.takeScreenshot}/>
+          <RaisedButton
+            backgroundColor="#a4c639"
+            icon={<FontIcon className="material-icons">settings</FontIcon>}
+          />
           <IconMenu
             iconButtonElement={
               <IconButton touch={true}>
@@ -70,7 +67,7 @@ class MenuToolbar extends React.Component {
             anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
             targetOrigin={{horizontal: 'left', vertical: 'top'}}
           >
-            <MenuItem primaryText="Settings" rightIcon={<FontIcon className="material-icons">settings</FontIcon>}/>
+            <SettingsDialog />
             <Divider />
             <MenuItem primaryText="More Info" />
           </IconMenu>
