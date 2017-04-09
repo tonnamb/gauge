@@ -11,16 +11,32 @@ class DisplayScreenshots extends Component {
   constructor (props) {
     super(props)
     this.renderScreenshots = this.renderScreenshots.bind(this)
+    this.renderScores = this.renderScores.bind(this)
   }
 
   renderScreenshots () {
     return this.props.screenshots.map((image) => {
-      const topTwo = this.getTopTwo(this.getAvgScores(image.emotions))
-      const plotData = this.prepDataBarChart(image.emotions)
-
       return (
         <li key={image.id}>
           <img src={image.src} alt='screenshot' />
+          {this.renderScores(image)}
+        </li>
+      )
+    })
+  }
+
+  renderScores (image) {
+    if (image.emotions.length === 0) {
+      return (
+        <div>
+          <p>Number of faces recognized = 0</p>
+        </div>
+      )
+    } else {
+      const topTwo = this.getTopTwo(this.getAvgScores(image.emotions))
+      const plotData = this.prepDataBarChart(image.emotions)
+      return (
+        <div>
           <p>Number of faces recognized = {image.emotions.length}</p>
           <p><MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.first.key + '.png'} />
@@ -40,9 +56,9 @@ class DisplayScreenshots extends Component {
             <Tooltip />
             <Bar dataKey='count' />
           </BarChart>
-        </li>
+        </div>
       )
-    })
+    }
   }
 
   getTopTwo (scores) {
