@@ -16,10 +16,14 @@ class DisplayScreenshots extends Component {
   renderScreenshots () {
     return this.props.screenshots.map((image) => {
       return (
-        <div key={image.id}>
-          <img src={image.src} alt='screenshot' />
-          {this.renderScores(image)}
-        </div>
+        <tr key={image.id}>
+          <td>
+            <img src={image.src} alt='screenshot' height="400" />
+          </td>
+          <td>
+            {this.renderScores(image)}
+          </td>
+        </tr>
       )
     })
   }
@@ -58,7 +62,6 @@ class DisplayScreenshots extends Component {
       )
     }
   }
-
   getTopTwo (scores) {
     let firstKey, secondKey
     let firstValue = 0
@@ -129,10 +132,12 @@ class DisplayScreenshots extends Component {
   render () {
     return (
       <div>
-        <h2>Screenshots</h2>
-        <ul>
+        <table cellSpacing="20">
+        <tr><th align="center" colSpan="2">RESULTS</th></tr>
+          <tr><th>Screenshots</th>
+          <th>Graphs</th></tr>
           {this.renderScreenshots()}
-        </ul>
+        </table>
       </div>
     )
   }
