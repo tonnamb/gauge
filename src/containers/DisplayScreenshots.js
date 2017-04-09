@@ -6,7 +6,6 @@ import Avatar from 'material-ui/Avatar'
 import Chip from 'material-ui/Chip'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-
 class DisplayScreenshots extends Component {
   constructor (props) {
     super(props)
@@ -22,7 +21,7 @@ class DisplayScreenshots extends Component {
             <img src={image.src} alt='screenshot' height='400' />
           </td>
           <td>
-            {(index+1) * 5} s
+            {(index + 1) * 5} s
             {this.renderScores(image, index, speech)}
           </td>
         </tr>
@@ -34,10 +33,10 @@ class DisplayScreenshots extends Component {
     if (image.emotions.length === 0) {
       return (
         <div>
-        <MuiThemeProvider><Chip alt="faces">
-          <Avatar src={'img/no_faces.png'} />
-          No Faces Detected
-        </Chip></MuiThemeProvider>
+          <MuiThemeProvider><Chip alt='faces'>
+            <Avatar src={'img/no_faces.png'} />
+            No Faces Detected
+          </Chip></MuiThemeProvider>
         </div>
       )
     } else {
@@ -46,18 +45,18 @@ class DisplayScreenshots extends Component {
       return (
         <div>
           <p>{speech[index].text}</p>
-          <div><MuiThemeProvider><Chip style={{margin: 4}} alt="faces">
+          <div><MuiThemeProvider><Chip style={{margin: 4}} alt='faces'>
             <Avatar src={'img/faces.png'} />
             {image.emotions.length} Face(s)
           </Chip></MuiThemeProvider>
-          <MuiThemeProvider><Chip style={{margin: 4, width: "" + Math.max((topTwo.first.value * 100).toFixed(0), 12) + "%"}} alt={topTwo.first.key}>
-            <Avatar src={'img/' + topTwo.first.key + '.png'} />
-            {(topTwo.first.value * 100).toFixed(0)}%
-          </Chip></MuiThemeProvider>
-          <MuiThemeProvider><Chip style={{margin: 4, width: "" + Math.max((topTwo.second.value * 100).toFixed(0), 12) + "%"}} alt={topTwo.first.key}>
-            <Avatar src={'img/' + topTwo.second.key + '.png'} />
-            {(topTwo.second.value * 100).toFixed(0)}%
-          </Chip></MuiThemeProvider>
+            <MuiThemeProvider><Chip style={{margin: 4, width: '' + Math.max((topTwo.first.value * 100).toFixed(0), 12) + '%'}} alt={topTwo.first.key}>
+              <Avatar src={'img/' + topTwo.first.key + '.png'} />
+              {(topTwo.first.value * 100).toFixed(0)}%
+            </Chip></MuiThemeProvider>
+            <MuiThemeProvider><Chip style={{margin: 4, width: '' + Math.max((topTwo.second.value * 100).toFixed(0), 12) + '%'}} alt={topTwo.first.key}>
+              <Avatar src={'img/' + topTwo.second.key + '.png'} />
+              {(topTwo.second.value * 100).toFixed(0)}%
+            </Chip></MuiThemeProvider>
           </div>
           <BarChart width={650} height={300} data={plotData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
@@ -146,15 +145,15 @@ class DisplayScreenshots extends Component {
 
   render () {
     return (
-      <div style= {{fontFamily:"Lobster Two"}}>
+      <div style={{fontFamily: 'Lobster Two'}}>
         <table cellSpacing='20'>
           <thead>
             <tr>
-              <th colSpan='2' style= {{fontFamily:"Lato", fontSize:"30px"}}>RESULTS</th>
+              <th colSpan='2' style={{fontFamily: 'Lato', fontSize: '30px'}}>RESULTS</th>
             </tr>
             <tr>
-              <th style= {{fontSize:"30px"}}>Screenshots</th>
-              <th style= {{fontSize:"30px"}}>Graphs</th>
+              <th style={{fontSize: '30px'}}>Screenshots</th>
+              <th style={{fontSize: '30px'}}>Graphs</th>
             </tr>
           </thead>
           <tbody>
