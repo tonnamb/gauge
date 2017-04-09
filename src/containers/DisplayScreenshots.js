@@ -14,7 +14,7 @@ class DisplayScreenshots extends Component {
     this.renderScores = this.renderScores.bind(this)
   }
 
-  renderScreenshots () {
+  renderScreenshots (speech) {
     return this.props.screenshots.map((image, index) => {
       return (
         <tr key={image.id}>
@@ -23,14 +23,14 @@ class DisplayScreenshots extends Component {
           </td>
           <td>
             {(index+1) * 5} s
-            {this.renderScores(image)}
+            {this.renderScores(image, index, speech)}
           </td>
         </tr>
       )
     })
   }
 
-  renderScores (image) {
+  renderScores (image, index, speech) {
     if (image.emotions.length === 0) {
       return (
         <div>
@@ -45,6 +45,7 @@ class DisplayScreenshots extends Component {
       const plotData = this.prepDataBarChart(image.emotions)
       return (
         <div>
+          <p>{speech[index].text}</p>
           <div><MuiThemeProvider><Chip style={{margin: 4}} alt="faces">
             <Avatar src={'img/faces.png'} />
             {image.emotions.length} Face(s)
@@ -69,6 +70,13 @@ class DisplayScreenshots extends Component {
       )
     }
   }
+
+  renderTranscript (text) {
+    return (
+      <p>{text}</p>
+    )
+  }
+
   getTopTwo (scores) {
     let firstKey, secondKey
     let firstValue = 0
@@ -150,7 +158,7 @@ class DisplayScreenshots extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.renderScreenshots()}
+            {this.renderScreenshots(this.props.speech)}
           </tbody>
         </table>
       </div>
@@ -160,13 +168,16 @@ class DisplayScreenshots extends Component {
 
 const mapStateToProps = (state) => {
   const screenshots = state.screenshots
+  const speech = state.speech
   return {
-    screenshots
+    screenshots,
+    speech
   }
 }
 
 DisplayScreenshots.propTypes = {
-  screenshots: React.PropTypes.array.isRequired
+  screenshots: React.PropTypes.array.isRequired,
+  speech: React.PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps)(DisplayScreenshots)

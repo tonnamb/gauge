@@ -45,3 +45,11 @@ export const propagateTime = () => {
     type: types.PROPAGATE_TIME
   }
 }
+
+export const receiveSpeech = (text) => {
+  console.log(text)
+  return {
+    type: types.RECEIVE_SPEECH,
+    text
+  }
+}

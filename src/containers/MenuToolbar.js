@@ -7,13 +7,14 @@ import SettingsDialog from './SettingsDialog'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchEmotions, propagateTime } from '../actions'
+import { fetchEmotions, propagateTime, receiveSpeech } from '../actions'
 
 class MenuToolbar extends React.Component {
   constructor (props) {
     super(props)
     this.handleCaptureButtonClick = this.handleCaptureButtonClick.bind(this)
-
+    this.restartSpeech = this.restartSpeech.bind(this)
+    this.currentText = ''
     this.state = {
       capturing: false,
       text: 'Capture',
@@ -26,11 +27,39 @@ class MenuToolbar extends React.Component {
       this.setState({capturing: false, text: 'Capture'})
       clearInterval(this.fetchTimerID)
       clearInterval(this.timerID)
+      clearInterval(this.speechTimerID)
     } else {
       this.setState({capturing: true, text: 'Stop Capturing'})
       this.fetchTimerID = setInterval(this.props.fetchEmotions.bind(this, this.props.webcam), 5000)
       this.timerID = setInterval(this.props.propagateTime, 1000)
+      this.initializeSpeech()
+      this.speechTimerID = setInterval(this.restartSpeech, 5000)
     }
+  }
+
+  initializeSpeech () {
+    this.recognition = new window.webkitSpeechRecognition()
+    this.recognition.onresult = (event) => {
+      this.currentText = event.results[0][0].transcript
+    }
+    this.recognition.continuous = true
+    this.recognition.interimResults = false
+    this.recognition.lang = 'en'
+    this.recognition.start()
+  }
+
+  restartSpeech () {
+    this.recognition.stop()
+    this.props.receiveSpeech(this.currentText)
+    this.currentText = ''
+    this.recognition = new window.webkitSpeechRecognition()
+    this.recognition.onresult = (event) => {
+      this.currentText = event.results[0][0].transcript
+    }
+    this.recognition.continuous = true
+    this.recognition.interimResults = false
+    this.recognition.lang = 'en'
+    this.recognition.start()
   }
 
   handleChange (event, index, value) {
@@ -73,12 +102,13 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ fetchEmotions, propagateTime }, dispatch)
+  return bindActionCreators({ fetchEmotions, propagateTime, receiveSpeech }, dispatch)
 }
 
 MenuToolbar.propTypes = {
   fetchEmotions: React.PropTypes.func.isRequired,
   propagateTime: React.PropTypes.func.isRequired,
+  receiveSpeech: React.PropTypes.func.isRequired,
   time: React.PropTypes.number.isRequired
 }
 
