@@ -30,9 +30,6 @@ class Camera extends Component {
           width={800}
           screenshotFormat='image/png'
         />
-        <div>
-          <button onClick={this.takeScreenshot}>Capture</button>
-        </div>
       </div>
     )
   }

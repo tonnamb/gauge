@@ -17,15 +17,36 @@ class MenuToolbar extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.takeScreenshot = this.takeScreenshot.bind(this)
+    this.startTime = null
+  }
+
+  state = {
+    capturing: false,
+    text: "Capture"
+  };
+
+  toggleCapturing() {
+    if (this.state.capturing) {
+      this.setState({capturing: false, text: "Capture"})
+    } else {
+      this.setState({capturing: true, text: "Stop Capturing"})
+      this.startTime = new Date().now();
+    }
   }
 
   handleChange = (event, index, value) => this.setState({value});
 
   takeScreenshot () {
+    this.toggleCapturing()
     const screenshot = this.props.webcam.getScreenshot()
     this.props.fetchEmotions(screenshot)
+  }
+
+  getTime() {
+    if (this.state.capturing) {
+      var time = new Date().now - this.startTime
+    }
   }
 
   render() {
@@ -37,7 +58,9 @@ class MenuToolbar extends React.Component {
           <ToolbarTitle text="&nbsp;Gauge" />
         </ToolbarGroup>
         <ToolbarGroup>
-          <RaisedButton label="Capture" primary={true} onTouchTap={this.takeScreenshot}/>
+          <ToolbarTitle text="00:00:00" />
+          <ToolbarSeparator />
+          <RaisedButton label={this.state.text} primary={!this.state.capturing} secondary={this.state.capturing} onTouchTap={this.takeScreenshot}/>
           <IconMenu
             iconButtonElement={
               <IconButton touch={true}>
