@@ -18,7 +18,7 @@ class DisplayScreenshots extends Component {
       return (
         <tr key={image.id}>
           <td>
-            <img src={image.src} alt='screenshot' height="400" />
+            <img src={image.src} alt='screenshot' height='400' />
           </td>
           <td>
             {this.renderScores(image)}
@@ -132,11 +132,19 @@ class DisplayScreenshots extends Component {
   render () {
     return (
       <div>
-        <table cellSpacing="20">
-        <tr><th align="center" colSpan="2">RESULTS</th></tr>
-          <tr><th>Screenshots</th>
-          <th>Graphs</th></tr>
-          {this.renderScreenshots()}
+        <table cellSpacing='20'>
+          <thead>
+            <tr>
+              <th colSpan='2'>RESULTS</th>
+            </tr>
+            <tr>
+              <th>Screenshots</th>
+              <th>Graphs</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderScreenshots()}
+          </tbody>
         </table>
       </div>
     )
