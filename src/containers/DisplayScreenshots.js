@@ -15,13 +15,14 @@ class DisplayScreenshots extends Component {
   }
 
   renderScreenshots () {
-    return this.props.screenshots.map((image) => {
+    return this.props.screenshots.map((image, index) => {
       return (
         <tr key={image.id}>
           <td>
             <img src={image.src} alt='screenshot' height='400' />
           </td>
           <td>
+            {(index+1) * 5} s
             {this.renderScores(image)}
           </td>
         </tr>
