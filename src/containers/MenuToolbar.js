@@ -18,28 +18,30 @@ class MenuToolbar extends React.Component {
 
   constructor(props) {
     super(props);
-    this.takeScreenshot = this.takeScreenshot.bind(this)
+    this.handleCaptureButtonClick = this.handleCaptureButtonClick.bind(this)
+    this.state = {
+      capturing: false,
+      text: "Capture",
+      interval: null
+    }
   }
-
-  state = {
-    capturing: false,
-    text: "Capture"
-  };
 
   toggleCapturing() {
     if (this.state.capturing) {
       this.setState({capturing: false, text: "Capture"})
+      clearInterval(this.timerID)
     } else {
       this.setState({capturing: true, text: "Stop Capturing"})
+      this.timerID = setInterval(this.props.fetchEmotions.bind(this, this.props.webcam), 5000)
     }
   }
 
-  handleChange = (event, index, value) => this.setState({value});
+  handleChange (event, index, value) {
+    this.setState({value});
+  }
 
-  takeScreenshot () {
+  handleCaptureButtonClick () {
     this.toggleCapturing()
-    const screenshot = this.props.webcam.getScreenshot()
-    this.props.fetchEmotions(screenshot)
   }
 
   render() {
@@ -53,7 +55,7 @@ class MenuToolbar extends React.Component {
         <ToolbarGroup>
           <ToolbarTitle text="00:00:00" />
           <ToolbarSeparator />
-          <RaisedButton label={this.state.text} primary={!this.state.capturing} secondary={this.state.capturing} onTouchTap={this.takeScreenshot}/>
+          <RaisedButton label={this.state.text} primary={!this.state.capturing} secondary={this.state.capturing} onTouchTap={this.handleCaptureButtonClick}/>
           <SettingsDialog />
         </ToolbarGroup>
       </Toolbar>

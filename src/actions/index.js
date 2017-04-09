@@ -20,8 +20,9 @@ export const receiveEmotions = (screenshot, response) => {
   }
 }
 
-export const fetchEmotions = (screenshot) => {
+export const fetchEmotions = (webcam) => {
   return (dispatch) => {
+    const screenshot = webcam.getScreenshot()
     dispatch(requestEmotions(screenshot))
     const client = new oxford.Client(API_KEY)
     return client.emotion.analyzeEmotion({ data: oxford.makeBuffer(screenshot) })

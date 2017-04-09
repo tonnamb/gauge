@@ -38,17 +38,16 @@ class DisplayScreenshots extends Component {
       return (
         <div>
           <p>Number of faces recognized = {image.emotions.length}</p>
-          <p><MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
+          <MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.first.key + '.png'} />
             {(topTwo.first.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
-          </p>
-          <p>
+          <br />
           <MuiThemeProvider><Chip onTouchTap="" alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.second.key + '.png'} />
             {(topTwo.second.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
-          </p>
+          <br />
           <BarChart width={600} height={300} data={plotData}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
             <XAxis dataKey='name' />
