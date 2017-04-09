@@ -137,15 +137,15 @@ class DisplayScreenshots extends Component {
 
   render () {
     return (
-      <div>
+      <div style= {{fontFamily:"Lobster Two"}}>
         <table cellSpacing='20'>
           <thead>
             <tr>
-              <th colSpan='2'>RESULTS</th>
+              <th colSpan='2' style= {{fontFamily:"Lato", fontSize:"30px"}}>RESULTS</th>
             </tr>
             <tr>
-              <th>Screenshots</th>
-              <th>Graphs</th>
+              <th style= {{fontSize:"30px"}}>Screenshots</th>
+              <th style= {{fontSize:"30px"}}>Graphs</th>
             </tr>
           </thead>
           <tbody>
