@@ -2,21 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts'
 
-import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip';
-import FontIcon from 'material-ui/FontIcon';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Avatar from 'material-ui/Avatar'
+import Chip from 'material-ui/Chip'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-const styles = {
-  chip: {
-    margin: 4,
-  },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    margin: '5px 0px'
-  },
-};
 
 class DisplayScreenshots extends Component {
   constructor (props) {
@@ -28,28 +17,15 @@ class DisplayScreenshots extends Component {
   renderScreenshots () {
     return this.props.screenshots.map((image) => {
       return (
-        <div key={image.id}>
-          <img src={image.src} alt='screenshot' style={{height: '300px'}} />
-          {this.renderScores(image)}
-        </div>
+        <tr key={image.id}>
+          <td>
+            <img src={image.src} alt='screenshot' height='400' />
+          </td>
+          <td>
+            {this.renderScores(image)}
+          </td>
+        </tr>
       )
-    })
-  }
-
-  renderMoods(scores) {
-    // TODO: Sort scores before mapping
-    // FIXME: map only works for arrays
-    return scores.map((score) => {
-      if (score.value == 0) {
-        return ""
-      } else {
-        return (
-          <MuiThemeProvider><Chip style={styles.chip} alt={score.key}>
-            <Avatar src={'img/' + score.key + '.png'} />
-            {(score.value * 100).toFixed(0)}%
-          </Chip></MuiThemeProvider>
-        )
-      }
     })
   }
 
@@ -68,15 +44,15 @@ class DisplayScreenshots extends Component {
       const plotData = this.prepDataBarChart(image.emotions)
       return (
         <div>
-          <div style={styles.wrapper}><MuiThemeProvider><Chip style={styles.chip} alt="faces">
+          <div><MuiThemeProvider><Chip style={{margin: 4}} alt="faces">
             <Avatar src={'img/faces.png'} />
             {image.emotions.length} Face(s)
           </Chip></MuiThemeProvider>
-          <MuiThemeProvider><Chip style={styles.chip} alt={topTwo.first.key}>
+          <MuiThemeProvider><Chip style={{margin: 4, width: "" + Math.max((topTwo.first.value * 100).toFixed(0), 12) + "%"}} alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.first.key + '.png'} />
             {(topTwo.first.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
-          <MuiThemeProvider><Chip style={styles.chip} alt={topTwo.first.key}>
+          <MuiThemeProvider><Chip style={{margin: 4, width: "" + Math.max((topTwo.second.value * 100).toFixed(0), 12) + "%"}} alt={topTwo.first.key}>
             <Avatar src={'img/' + topTwo.second.key + '.png'} />
             {(topTwo.second.value * 100).toFixed(0)}%
           </Chip></MuiThemeProvider>
@@ -92,7 +68,6 @@ class DisplayScreenshots extends Component {
       )
     }
   }
-
   getTopTwo (scores) {
     let firstKey, secondKey
     let firstValue = 0
@@ -163,10 +138,20 @@ class DisplayScreenshots extends Component {
   render () {
     return (
       <div>
-        <h2>Screenshots</h2>
-        <ul>
-          {this.renderScreenshots()}
-        </ul>
+        <table cellSpacing='20'>
+          <thead>
+            <tr>
+              <th colSpan='2'>RESULTS</th>
+            </tr>
+            <tr>
+              <th>Screenshots</th>
+              <th>Graphs</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderScreenshots()}
+          </tbody>
+        </table>
       </div>
     )
   }

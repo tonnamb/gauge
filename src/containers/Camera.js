@@ -22,7 +22,7 @@ class Camera extends Component {
 
   render () {
     return (
-      <div style={{"textAlign": "center", "background": "grey"}}>
+      <div style={{'textAlign': 'center', 'background': 'grey'}}>
         <Webcam
           ref='webcam'
           muted
