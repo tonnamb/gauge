@@ -30,7 +30,7 @@ class MenuToolbar extends React.Component {
       clearInterval(this.speechTimerID)
     } else {
       this.setState({capturing: true, text: 'Stop Capturing'})
-      this.fetchTimerID = setInterval(this.props.fetchEmotions.bind(this, this.props.webcam), 5000)
+      this.fetchTimerID = setInterval(this.props.fetchEmotions.bind(this, this.props.webcam, this.props.apiKey), 5000)
       this.timerID = setInterval(this.props.propagateTime, 1000)
       this.initializeSpeech()
       this.speechTimerID = setInterval(this.restartSpeech, 5000)
@@ -95,9 +95,11 @@ class MenuToolbar extends React.Component {
 const mapStateToProps = (state) => {
   const webcam = state.webcam
   const time = state.time
+  const apiKey = state.apiKey
   return {
     webcam,
-    time
+    time,
+    apiKey
   }
 }
 

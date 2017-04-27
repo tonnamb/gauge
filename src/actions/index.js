@@ -1,8 +1,6 @@
 import * as types from './types'
 import oxford from 'project-oxford'
 
-const API_KEY = '886ff18f3a0b44588a9e3d10dba801ee'
-
 export const requestEmotions = (screenshot) => {
   console.log('Requesting emotions')
   return {
@@ -20,11 +18,11 @@ export const receiveEmotions = (screenshot, response) => {
   }
 }
 
-export const fetchEmotions = (webcam) => {
+export const fetchEmotions = (webcam, apiKey) => {
   return (dispatch) => {
     const screenshot = webcam.getScreenshot()
     dispatch(requestEmotions(screenshot))
-    const client = new oxford.Client(API_KEY)
+    const client = new oxford.Client(apiKey)
     return client.emotion.analyzeEmotion({ data: oxford.makeBuffer(screenshot) })
     .then(response => {
       dispatch(receiveEmotions(screenshot, response))
@@ -47,9 +45,15 @@ export const propagateTime = () => {
 }
 
 export const receiveSpeech = (text) => {
-  console.log(text)
   return {
     type: types.RECEIVE_SPEECH,
     text
+  }
+}
+
+export const changeApiKey = (apiKey) => {
+  return {
+    type: types.CHANGE_API_KEY,
+    apiKey
   }
 }

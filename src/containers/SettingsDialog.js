@@ -1,27 +1,42 @@
 import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-import Slider from 'material-ui/Slider'
 import TextField from 'material-ui/TextField'
 import FontIcon from 'material-ui/FontIcon'
 import RaisedButton from 'material-ui/RaisedButton'
 
-export default class SettingsDialog extends Component {
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { changeApiKey } from '../actions'
+
+class SettingsDialog extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
+      textFieldValue: ''
     }
     this.handleOpen = this.handleOpen.bind(this)
-    this.handleClose = this.handleClose.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
+    this.handleApply = this.handleApply.bind(this)
+    this.handleTextFieldChange = this.handleTextFieldChange.bind(this)
   }
 
   handleOpen () {
     this.setState({open: true})
   }
 
-  handleClose () {
+  handleCancel () {
     this.setState({open: false})
+  }
+
+  handleApply () {
+    this.props.changeApiKey(this.state.textFieldValue)
+    this.setState({open: false, textFieldValue: ''})
+  }
+
+  handleTextFieldChange (e) {
+    this.setState({textFieldValue: e.target.value})
   }
 
   render () {
@@ -29,23 +44,23 @@ export default class SettingsDialog extends Component {
       <FlatButton
         label='Cancel'
         primary
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleCancel}
       />,
       <FlatButton
         label='Apply'
         primary
-        keyboardFocused
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleApply}
       />
     ]
 
     const settings = (
       <div>
         <TextField
-          hintText='API Key'
+          hintText='Emotions API Key'
           errorText='This field is required'
-        />,
-        <Slider label='Test' step={0.10} value={0.5} />
+          value={this.state.textFieldValue}
+          onChange={this.handleTextFieldChange}
+        />
       </div>)
 
     return (
@@ -71,3 +86,9 @@ export default class SettingsDialog extends Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ changeApiKey }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(SettingsDialog)
