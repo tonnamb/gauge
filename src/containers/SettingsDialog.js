@@ -67,11 +67,11 @@ class SettingsDialog extends Component {
       <div>
         <RaisedButton
           backgroundColor='a4c639'
-          icon={<FontIcon className='material-icons'>settings</FontIcon>}
+          label='Set API Key'
           onTouchTap={this.handleOpen}
         />
         <Dialog
-          title='Settings'
+          title='Set API Key'
           actions={actions}
           modal={false}
           open={this.state.open}
