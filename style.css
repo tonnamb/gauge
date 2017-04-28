@@ -3,3 +3,6 @@ body {background: #EEE}
 table {padding-top: 10px}
 thead {padding: 10px 0px}
 tbody {font-family: "Roboto"}
+.welcome-container {
+  padding: 0 30px;
+}
